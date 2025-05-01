@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +23,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class OxygenAlert {
 
     private static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ModMain.MODID);
-    public static final RegistryObject<SoundEvent> LOW_OXYGEN_SOUND = SOUND_EVENTS.register("oxygen_30", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(ModMain.MODID, "oxygen_30")));
+    public static final RegistryObject<SoundEvent> LOW_OXYGEN_SOUND = SOUND_EVENTS.register("oxygen_alert_30", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(ModMain.MODID, "oxygen_alert_30")));
     public static final RegistryObject<SoundEvent> VERY_LOW_OXYGEN_SOUND = SOUND_EVENTS.register("oxygen_5", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(ModMain.MODID, "oxygen_5")));
 
     private boolean played30 = false;
@@ -33,7 +32,7 @@ public class OxygenAlert {
     public OxygenAlert() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
         SOUND_EVENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MinecraftForge.EVENT_BUS.register(this);
+        
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
@@ -51,28 +50,27 @@ public class OxygenAlert {
         if (player == null) return;
       
         int air = player.getAirSupply();
-    
 
-        if (!player.isSubmerged()) return;
-        
-        if (air < 120) return;
-        
-        if (air <= 60 && !played30) { // 30 seconds of oxygen (60 ticks)
-            soundManager.play(SimpleSoundInstance.forUI(LOW_OXYGEN_SOUND.get(), 1.0F, 1.0F));
-            played30 = true;
-        }
+        if (player.isEyeInFluid(net.minecraft.world.level.material.Fluids.WATER)) {
+            if (air < 1200) return;
+            
+            if (air <= 60 && !played30) { // 30 seconds of oxygen (60 ticks)
+                soundManager.play(SimpleSoundInstance.forUI(LOW_OXYGEN_SOUND.get(), 1.0F, 1.0F));
+                played30 = true;
+            }
 
-        if (air <= 10 && !played5) { // 5 seconds of oxygen (10 ticks)
-            soundManager.play(SimpleSoundInstance.forUI(VERY_LOW_OXYGEN_SOUND.get(), 1.0F, 1.0F));
-            played5 = true;
-        }
+            if (air <= 10 && !played5) { // 5 seconds of oxygen (10 ticks)
+                soundManager.play(SimpleSoundInstance.forUI(VERY_LOW_OXYGEN_SOUND.get(), 1.0F, 1.0F));
+                played5 = true;
+            }
 
-        if (air > 60) {
-            played30 = false;
-        }
+            if (air > 60) {
+                played30 = false;
+            }
 
-        if (air > 10) {
-            played5 = false;
+            if (air > 10) {
+                played5 = false;
+            }
         }
     }
 
