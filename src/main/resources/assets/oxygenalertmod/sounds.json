@@ -1,12 +1,12 @@
 {
   "oxygen_alert_30": {
     "sounds": [
-      "examplemod:oxygen_alert_30"
+      "oxygenalertmod:oxygen_alert_30"
     ]
   },
   "oxygen_alert_5": {
     "sounds": [
-      "examplemod:oxygen_alert_5"
+      "oxygenalertmod:oxygen_alert_5"
     ]
   }
 }

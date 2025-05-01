@@ -1,4 +1,4 @@
-package com.lothrazar.examplemod;
+package com.polar.oxygenalertmod;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(ModMain.MODID)
 public class ModMain {
 
-  public static final String MODID = "examplemod";
+  public static final String MODID = "oxygenalertmod";
   public static final Logger LOGGER = LogManager.getLogger();
 
   public ModMain() {

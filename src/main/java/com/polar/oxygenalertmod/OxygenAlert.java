@@ -1,4 +1,4 @@
-package com.lothrazar.examplemod;
+package com.polar.oxygenalertmod;
 
 import net.minecraft.tags.FluidTags;
 import net.minecraft.client.Minecraft;

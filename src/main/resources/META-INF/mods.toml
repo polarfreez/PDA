@@ -1,7 +1,7 @@
 modLoader="javafml"
 license="MIT"
 loaderVersion="[47,)"
-issueTrackerURL="https://github.com/Lothrazar/ForgeTemplate/issues"
+issueTrackerURL="https://github.com/Polar-28/oxygenalertmod"
 
 [[mods]]
     modId="oxygenalertmod"
@@ -9,10 +9,8 @@ issueTrackerURL="https://github.com/Lothrazar/ForgeTemplate/issues"
     displayName="Oxygen Alert Mod"
     logoFile=""
     credits="Thanks to forge fml mcp Mojang"
-    authors="Lothrazar"
-    description='''
-        A mod for playing an audio when the oxygen of the player is low.
-    '''
+    authors="Polar"
+    description="A mod for playing an audio when the oxygen of the player is low."
 
 [[dependencies.oxygenalertmod]]
     modId="forge" 
