@@ -1,6 +1,7 @@
 package com.polar.oxygenalertmod;
 
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -8,7 +9,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,13 +38,15 @@ public class OxygenAlert {
         LocalPlayer player = mc.player;
        
         if (player == null) return;
-
-        ModMain.LOGGER.info("Current air supply: {}", air);
-        int air = player.getAirSupply();
         
+        int air = player.getAirSupply();
+        ModMain.LOGGER.info("Current air supply: {}", air);
+
         if (!player.isEyeInFluid(FluidTags.WATER)) {
             already_played_30 = false;
             already_played_10 = false;
+
+
             ModMain.LOGGER.info("Not in water, resetting flags");
             return;
         }
@@ -61,15 +63,14 @@ public class OxygenAlert {
     }
 
     private void playAlertSound(SoundEvent soundEvent) {
+        
         Minecraft mc = Minecraft.getInstance();
         LocalPlayer player = mc.player;
         if (player != null && mc.getSoundManager() != null) {
-            SimpleSoundInstance sound = SimpleSoundInstance.forPlayer(soundEvent, player.getSoundSource(), player.getX(), player.getY(), player.getZ());
-            mc.getSoundManager().play(sound);
+            SimpleSoundInstance instance = new SimpleSoundInstance(soundEvent.getLocation(), SoundSource.AMBIENT, 1.0F, 1.0F, player.getRandom(), player.blockPosition());
+            instance.setPitch(1f);
+            mc.getSoundManager().play(instance);
 
         }
     }
-  
-
-
 }
