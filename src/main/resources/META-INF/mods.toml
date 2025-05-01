@@ -4,22 +4,12 @@ loaderVersion="[47,)"
 issueTrackerURL="https://github.com/Lothrazar/ForgeTemplate/issues"
 
 [[mods]]
-    modId="examplemod"
-    version="0.0.1"
-    displayName="Oxygen Alert Mod"
-    updateJSONURL="https://raw.githubusercontent.com/Lothrazar/ForgeTemplate/trunk/1.20/update.json"
-    displayURL="https://www.curseforge.com/minecraft/mc-mods/_curseslug_"
-    credits="Thanks to forge fml mcp Mojang"
-    authors="${mod_authors}"
-    description="A mod for playing an audio when the oxygen of the player is low."
-
-[[mods]]
     modId="oxygenalertmod"
     version="0.0.2"
     displayName="Oxygen Alert Mod"
     logoFile=""
     credits="Thanks to forge fml mcp Mojang"
-    authors="${mod_authors}"
+    authors="Lothrazar"
     description='''
         A mod for playing an audio when the oxygen of the player is low.
     '''
@@ -27,12 +17,12 @@ issueTrackerURL="https://github.com/Lothrazar/ForgeTemplate/issues"
 [[dependencies.oxygenalertmod]]
     modId="forge" 
     mandatory=true 
-    versionRange="${neo_version_range}" 
+    versionRange="[47.1,)" 
     ordering="NONE"
     side="BOTH"
 [[dependencies.oxygenalertmod]]
     modId="minecraft"
     mandatory=true
-    versionRange="[${mc_version},)"
+    versionRange="[1.20.1,)"
     ordering="NONE"
     side="BOTH"
