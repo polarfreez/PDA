@@ -13,17 +13,17 @@ issueTrackerURL="https://github.com/Lothrazar/ForgeTemplate/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
-modId="examplemod" #mandatory
+modId="oxygenalertmod" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="${mod_version}" #mandatory
+version="0.0.1" #mandatory
  # A display name for the mod
  
-displayName="examplemod" #mandatory
+displayName="Oxygen Alert Mod" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 updateJSONURL="https://raw.githubusercontent.com/Lothrazar/ForgeTemplate/trunk/1.20/update.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI # replace with your website
 displayURL="https://www.curseforge.com/minecraft/mc-mods/_curseslug_"
-
+#description="A mod for playing an audio when the oxygen of the player is low."
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="" #optional
 # A text field displayed in the mod UI
@@ -32,17 +32,15 @@ credits="Thanks to forge fml mcp Mojang" #optional
 authors="${mod_authors}" #optional
 # The description text for the mod (multi line!) (#mandatory)
 
-description='''
-examplemod by ${mod_authors}
-'''
+description="A mod for playing an audio when the oxygen of the player is low."
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
+[[dependencies.oxygenalertmod]] #optional
     modId="forge" 
     mandatory=true 
     versionRange="${neo_version_range}" 
     ordering="NONE"
     side="BOTH"
-[[dependencies.examplemod]]
+[[dependencies.oxygenalertmod]]
     modId="minecraft"
     mandatory=true
     versionRange="[${mc_version},)"
@@ -50,7 +48,7 @@ examplemod by ${mod_authors}
     side="BOTH"
 [[dependencies.examplemod]]
     modId="flib"
-    mandatory=true
+    mandatory=false
     versionRange="[${flib_version},)"
     ordering="NONE"
     side="BOTH"

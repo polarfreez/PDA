@@ -1,0 +1,13 @@
+{
+  "oxygen_alert_30": {
+    "sounds": [
+      "examplemod:oxygen_alert_30"
+    ]
+  },
+  "oxygen_alert_5": {
+    "sounds": [
+      "examplemod:oxygen_alert_5"
+    ]
+  }
+}
+src/main/resources/assets/examplemod/sounds/oxygen_alert.ogg
