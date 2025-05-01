@@ -52,12 +52,12 @@ public class OxygenAlert {
         }
         if (air <= 30 && !already_played_30){
             ModMain.LOGGER.info("Playing oxygen_alert_30 sound");
-            playAlertSound(ModRegistry.OXYGEN_ALERT_30.get());
+            playAlertSound(ModRegistry.VERY_LOW_OXYGEN_SOUND.get());
             already_played_30=true;
         }
         if (air <= 10 && !already_played_10){
             ModMain.LOGGER.info("Playing oxygen_alert_10 sound");
-            playAlertSound(ModRegistry.OXYGEN_ALERT_10.get());
+            playAlertSound(ModRegistry.LOW_OXYGEN_SOUND.get());
             already_played_10 =true;
         }
     }
@@ -67,8 +67,7 @@ public class OxygenAlert {
         Minecraft mc = Minecraft.getInstance();
         LocalPlayer player = mc.player;
         if (player != null && mc.getSoundManager() != null) {
-            SimpleSoundInstance instance = new SimpleSoundInstance(soundEvent.getLocation(), SoundSource.AMBIENT, 1.0F, 1.0F, player.getRandom(), player.blockPosition());
-            instance.setPitch(1f);
+            SimpleSoundInstance instance = new SimpleSoundInstance(soundEvent, SoundSource.AMBIENT, 1.0F, 1.0F, player.getRandom(), player.blockPosition());
             mc.getSoundManager().play(instance);
 
         }
