@@ -1,5 +1,6 @@
 package com.lothrazar.examplemod;
 
+import net.minecraft.tags.FluidTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.client.player.LocalPlayer;
@@ -9,6 +10,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -51,7 +53,7 @@ public class OxygenAlert {
       
         int air = player.getAirSupply();
 
-        if (player.isEyeInFluid(net.minecraft.world.level.material.Fluids.WATER)) {
+        if (player.isEyeInFluid(FluidTags.WATER)) {
             if (air < 1200) return;
             
             if (air <= 60 && !played30) { // 30 seconds of oxygen (60 ticks)
