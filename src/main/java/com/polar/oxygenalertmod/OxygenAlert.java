@@ -25,11 +25,12 @@ import net.minecraftforge.registries.RegistryObject;
 public class OxygenAlert {
 
     private static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ModMain.MODID);
-    public static final RegistryObject<SoundEvent> LOW_OXYGEN_SOUND = SOUND_EVENTS.register("oxygen_alert_30", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(ModMain.MODID, "oxygen_alert_30")));
-    public static final RegistryObject<SoundEvent> VERY_LOW_OXYGEN_SOUND = SOUND_EVENTS.register("oxygen_5", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(ModMain.MODID, "oxygen_5")));
+    public static final RegistryObject<SoundEvent> LOW_OXYGEN_SOUND = SOUND_EVENTS.register("oxygen_alert_10", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(ModMain.MODID, "oxygen_alert_10")));
+    public static final RegistryObject<SoundEvent> VERY_LOW_OXYGEN_SOUND = SOUND_EVENTS.register("oxygen_alert_30", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(ModMain.MODID, "oxygen_alert_30")));
 
-    private boolean played30 = false;
-    private boolean played5 = false;
+    private boolean already_played_30 = false;
+    private boolean already_played_10 = false;
+    
 
     public OxygenAlert() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
@@ -52,28 +53,24 @@ public class OxygenAlert {
         if (player == null) return;
       
         int air = player.getAirSupply();
-
-        if (player.isEyeInFluid(FluidTags.WATER)) {
-            if (air < 1200) return;
-            
-            if (air <= 60 && !played30) { // 30 seconds of oxygen (60 ticks)
-                soundManager.play(SimpleSoundInstance.forUI(LOW_OXYGEN_SOUND.get(), 1.0F, 1.0F));
-                played30 = true;
-            }
-
-            if (air <= 10 && !played5) { // 5 seconds of oxygen (10 ticks)
-                soundManager.play(SimpleSoundInstance.forUI(VERY_LOW_OXYGEN_SOUND.get(), 1.0F, 1.0F));
-                played5 = true;
-            }
-
-            if (air > 60) {
-                played30 = false;
-            }
-
-            if (air > 10) {
-                played5 = false;
-            }
+        
+        if (!player.isEyeInFluid(FluidTags.WATER)) {
+            already_played_30 = false;
+            already_played_10 = false;
+            return;
         }
+
+        if(player.isEyeInFluid(FluidTags.WATER)){
+            if (air <= 10 && !already_played_10) {
+                 soundManager.play(SimpleSoundInstance.forUI(VERY_LOW_OXYGEN_SOUND.get(), 1.0F, 1.0F));
+                 already_played_10 = true;
+                 already_played_30 = true;
+             } else if (air <= 30 && !already_played_30) {
+                soundManager.play(SimpleSoundInstance.forUI(LOW_OXYGEN_SOUND.get(), 1.0F, 1.0F));
+                 already_played_30 = true;
+             }
+        }
+
     }
 
 }
